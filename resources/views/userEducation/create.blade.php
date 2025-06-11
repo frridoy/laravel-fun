@@ -4,43 +4,78 @@
         @csrf
         <div class="form-group">
             <label for="user_id">Select User</label>
-            <select name="user_id" id="user_id" required>
+            <select name="user_id" id="user_id">
                 <option value="" disabled selected>Choose a user</option>
                 @foreach ($userProfiles as $profile)
                     <option value="{{ $profile->id }}">{{ $profile->id }} - {{ $profile->name }}</option>
                 @endforeach
             </select>
+            @error('user_id')
+                <div class="error-message" style="color: red; font-size: 14px; margin-top: 4px;">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
 
         <div class="form-group">
             <label for="degree">Degree</label>
-            <input type="text" name="degree" id="degree" placeholder="e.g. B.Sc in Computer Science" required>
+            <input type="text" name="degree" id="degree" placeholder="e.g. B.Sc in Computer Science" >
+            @error('degree')
+                <div class="error-message" style="color: #dc2626; font-size: 14px; margin-top: 4px;">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
 
         <div class="form-group">
             <label for="institution">Institution</label>
-            <input type="text" name="institution" id="institution" placeholder="e.g. University of XYZ" required>
+            <input type="text" name="institution" id="institution" placeholder="e.g. University of XYZ" >
+            @error('institution')
+                <div class="error-message" style="color: #dc2626; font-size: 14px; margin-top: 4px;">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
 
         <div class="form-group">
             <label for="field_of_study">Field of Study</label>
             <input type="text" name="field_of_study" id="field_of_study" placeholder="e.g. Software Engineering">
+            @error('field_of_study')
+                <div class="error-message" style="color: #dc2626; font-size: 14px; margin-top: 4px;">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
 
         <div class="form-group">
             <label for="grade">Grade</label>
             <input type="text" name="grade" id="grade" placeholder="e.g. 3.8 GPA">
+            @error('grade')
+                <div class="error-message" style="color: #dc2626; font-size: 14px; margin-top: 4px;">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
 
         <div class="form-row">
             <div class="form-group">
                 <label for="start_date">Start Date</label>
                 <input type="date" name="start_date" id="start_date">
+                @error('start_date')
+                    <div class="error-message" style="color: #dc2626; font-size: 14px; margin-top: 4px;">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
 
             <div class="form-group">
                 <label for="end_date">End Date</label>
                 <input type="date" name="end_date" id="end_date">
+                @error('end_date')
+                    <div class="error-message" style="color: #dc2626; font-size: 14px; margin-top: 4px;">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
         </div>
 

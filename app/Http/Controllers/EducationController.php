@@ -25,10 +25,10 @@ class EducationController extends Controller
             'user_id' => 'required|exists:user_profiles,id',
             'degree' => 'required|string|max:255',
             'institution' => 'required|string|max:255',
-            'field_of_study' => 'nullable|string|max:255',
-            'grade' => 'nullable|string|max:50',
+            'field_of_study' => 'required|string|max:255',
+            'grade' => 'required|string|max:50',
             'start_date' => 'required|date',
-            'end_date' => 'nullable|date|after_or_equal:start_date',
+            'end_date' => 'required|date|after_or_equal:start_date',
         ]);
 
         $educationDetails = [
