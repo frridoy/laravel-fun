@@ -9,7 +9,11 @@ use Illuminate\Http\Request;
 
 class EducationController extends Controller
 {
-    public function index() {}
+    public function index() {
+
+        $educations = Education::with('user:id,name')->get();
+        return view('userEducation.index', compact('educations'));
+    }
     public function create()
     {
         $userProfiles = UserProfile::select('id', 'name')->get();
