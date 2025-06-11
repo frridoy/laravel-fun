@@ -1,13 +1,18 @@
 <div class="education-form-container">
-    <h2><i class="fas fa-user-graduate"></i> Add Education</h2>
-    <form action="{{ route('user-educations.store') }}" method="POST" class="education-form">
+    <h2><i class="fas fa-user-graduate"></i> @if($education) Edit @else Add @endif Education</h2>
+    <form action="{{isset($education->education_id) ? route('user-educations.update', $education->education_id) : route('user-educations.store')}}"      method="POST" class="education-form">
+        @if(isset($education->education_id))
+            @method('PUT')
+        @endif
         @csrf
         <div class="form-group">
             <label for="user_id">Select User</label>
             <select name="user_id" id="user_id">
                 <option value="" disabled selected>Choose a user</option>
                 @foreach ($userProfiles as $profile)
-                    <option value="{{ $profile->id }}">{{ $profile->id }} - {{ $profile->name }}</option>
+                     <option value="{{ $profile->id }}" {{ isset($education->user_id) && $education->user_id == $profile->id ? 'selected' : '' }}>
+                        {{ $profile->id }} - {{ $profile->name }}
+                    </option>
                 @endforeach
             </select>
             @error('user_id')
@@ -19,7 +24,7 @@
 
         <div class="form-group">
             <label for="degree">Degree</label>
-            <input type="text" name="degree" id="degree" placeholder="e.g. B.Sc in Computer Science" >
+            <input type="text" name="degree" id="degree" placeholder="e.g. B.Sc in Computer Science" value="{{isset($education->education_id) ? $education->education_details['degree'] : ''}}" >
             @error('degree')
                 <div class="error-message" style="color: #dc2626; font-size: 14px; margin-top: 4px;">
                     {{ $message }}
@@ -29,7 +34,7 @@
 
         <div class="form-group">
             <label for="institution">Institution</label>
-            <input type="text" name="institution" id="institution" placeholder="e.g. University of XYZ" >
+            <input type="text" name="institution" id="institution" placeholder="e.g. University of XYZ" value="{{isset($education->education_id) ? $education->education_details['institution'] : ''}}"  >
             @error('institution')
                 <div class="error-message" style="color: #dc2626; font-size: 14px; margin-top: 4px;">
                     {{ $message }}
@@ -39,7 +44,7 @@
 
         <div class="form-group">
             <label for="field_of_study">Field of Study</label>
-            <input type="text" name="field_of_study" id="field_of_study" placeholder="e.g. Software Engineering">
+            <input type="text" name="field_of_study" id="field_of_study" placeholder="e.g. Software Engineering" value="{{isset($education->education_id) ? $education->education_details['field_of_study'] : ''}}">
             @error('field_of_study')
                 <div class="error-message" style="color: #dc2626; font-size: 14px; margin-top: 4px;">
                     {{ $message }}
@@ -49,7 +54,7 @@
 
         <div class="form-group">
             <label for="grade">Grade</label>
-            <input type="text" name="grade" id="grade" placeholder="e.g. 3.8 GPA">
+            <input type="text" name="grade" id="grade" placeholder="e.g. 3.8 GPA"value="{{isset($education->education_id) ? $education->education_details['grade'] : ''}}">
             @error('grade')
                 <div class="error-message" style="color: #dc2626; font-size: 14px; margin-top: 4px;">
                     {{ $message }}
@@ -60,7 +65,7 @@
         <div class="form-row">
             <div class="form-group">
                 <label for="start_date">Start Date</label>
-                <input type="date" name="start_date" id="start_date">
+                <input type="date" name="start_date" id="start_date" value="{{isset($education->education_id) ? $education->education_details['start_date'] : ''}}">
                 @error('start_date')
                     <div class="error-message" style="color: #dc2626; font-size: 14px; margin-top: 4px;">
                         {{ $message }}
@@ -70,7 +75,7 @@
 
             <div class="form-group">
                 <label for="end_date">End Date</label>
-                <input type="date" name="end_date" id="end_date">
+                <input type="date" name="end_date" id="end_date" value="{{isset($education->education_id) ? $education->education_details['end_date'] : ''}}">
                 @error('end_date')
                     <div class="error-message" style="color: #dc2626; font-size: 14px; margin-top: 4px;">
                         {{ $message }}

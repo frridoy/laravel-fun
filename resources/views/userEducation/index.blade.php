@@ -21,6 +21,7 @@
                 <th>Grade</th>
                 <th>Start Date</th>
                 <th>End Date</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -34,6 +35,9 @@
                     <td>{{ $education->education_details['grade'] }}</td>
                     <td>{{ $education->education_details['start_date'] }}</td>
                     <td>{{ $education->education_details['end_date'] }}</td>
+                    <td>
+                        <a href="{{ route('user-educations.edit', $education->education_id) }}" class="btn btn-primary">Edit</a>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
