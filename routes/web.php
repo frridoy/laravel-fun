@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\EducationController;
 use App\Http\Controllers\UserProfileController;
+use App\Models\Education;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +19,7 @@ Route::post('/user-profiles', [UserProfileController::class, 'store'])->name('us
 Route::get('/download-sample-csv', [UserProfileController::class, 'downloadSampleCsv'])->name('userProfile.downloadSampleCsv');
 Route::get('/import-csv', [UserProfileController::class, 'importCsv'])->name('userProfile.importCsv');
 Route::post('/import-csv/store', [UserProfileController::class, 'importCsvStore'])->name('userProfile.importCsv');
+
+Route::get('/user-educations', [EducationController::class, 'index'])->name('user-educations.index');
+Route::get('/user-educations/create', [EducationController::class, 'create'])->name('user-educations.create');
+Route::post('/user-educations/store', [EducationController::class, 'store'])->name('user-educations.store');
